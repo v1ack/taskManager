@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Вы вошли как {{ current_user.username }}</h1>
+    {% if temp %}
+        {{ temp }}
+    {% endif %}
+    <div class="uk-child-width-1-2@s" uk-grid>
+        <div>
+            <div class="uk-card uk-card-default uk-card-hover uk-card-body">
+                <h3 class="uk-card-title">Задачи для вас</h3>
+                <p>Задач выполнено {{ stat['to']['verified'] }}</p>
+                <p>Задач в ожидании подтверждения {{ stat['to']['done'] }}</p>
+                <p>Задач не выполнено {{ stat['to']['not_done'] }}</p>
+                <p>Задач всего {{ stat['to']['all'] }}</p>
+            </div>
+        </div>
+    {% if stat['by']['all'] %}
+        <div>
+            <div class="uk-card uk-card-default uk-card-hover uk-card-body">
+                <h3 class="uk-card-title">Задачи данные вами</h3>
+                <p>Задач выполнено {{ stat['by']['verified'] }}</p>
+                <p>Задач в ожидании подтверждения {{ stat['by']['done'] }}</p>
+                <p>Задач не выполнено {{ stat['by']['not_done'] }}</p>
+                <p>Задач всего {{ stat['by']['all'] }}</p>
+            </div>
+        </div>
+    {% endif %}
+    </div>
+{% endblock %}

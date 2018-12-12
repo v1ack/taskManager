@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block content %}
+    {% if tasks %}
+        <h1>Задачи для вас</h1>
+        <table class="uk-table uk-table-striped">
+            <thead>
+            <tr>
+                <th>Задача</th>
+                <th>Результат</th>
+                <th class="uk-table-shrink">Статус</th>
+                <th>Автор</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for task in tasks %}
+                <tr>
+                    <td>{{ task.task }}</td>
+                    <td>
+                        {% if task.result %}
+                            {{ task.result }}
+                        {% else %}
+                            <form action="" method="post">
+                                {{ form.hidden_tag() }}
+                                {{ form.task_result(class_='uk-input uk-form-width-medium uk-form-small') }}
+                                {{ form.number(value='' + task.id|string, type='hidden') }}
+                                {{ form.submit(class_='uk-button uk-button-default uk-button-small') }}
+                            </form>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if task.status == 0 %}
+                            <span class="uk-margin-small-right" uk-icon="question"></span>
+                        {% elif task.status == 1 %}
+                            <span class="uk-margin-small-right" uk-icon="clock"></span>
+                        {% else %}
+                            <span class="uk-margin-small-right" uk-icon="check"></span>
+                        {% endif %}
+                    </td>
+                    <td>{{ task.get_author_name() }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+{% endblock %}
