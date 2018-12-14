@@ -20,7 +20,7 @@
                         {% if task.result %}
                             {{ task.result }}
                         {% else %}
-                            <form action="" method="post">
+                            <form action="" method="post" name="{{ task.id|string }}">
                                 {{ form.hidden_tag() }}
                                 {{ form.task_result(class_='uk-input uk-form-width-medium uk-form-small') }}
                                 {{ form.number(value='' + task.id|string, type='hidden') }}

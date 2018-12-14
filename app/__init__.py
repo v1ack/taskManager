@@ -10,5 +10,7 @@ db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 login = LoginManager(app)
 login.login_view = 'login'
+login.login_message_category = 'danger'
+login.login_message = 'Для доступа к данной странице требуется авторизация'
 
 from app import routes, models, errors

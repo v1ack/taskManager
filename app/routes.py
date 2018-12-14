@@ -51,7 +51,7 @@ def login():
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
         if user is None or not user.check_password(form.password.data):
-            flash('Неверные учетные данные')
+            flash('Неверные учетные данные', 'danger')
             return redirect(url_for('login'))
         login_user(user, remember=form.remember_me.data)
         next_page = request.args.get('next')
@@ -78,7 +78,7 @@ def register():
         user.set_password(form.password.data)
         db.session.add(user)
         db.session.commit()
-        flash('Новый пользователь добавлен')
+        flash('Новый пользователь добавлен', 'primary')
         return redirect(url_for('login'))
     return render_template('register.html', title='Новый пользователь', form=form)
 
@@ -95,6 +95,6 @@ def add_task():
                     timestamp=datetime.utcnow())
         db.session.add(task)
         db.session.commit()
-        flash('Задача назначенна')
+        flash('Задача назначенна', 'primary')
         return redirect(url_for('add_task'))
     return render_template('add_task.html', title='Назначить задачу', form=form)

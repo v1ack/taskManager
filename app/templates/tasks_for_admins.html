@@ -2,11 +2,6 @@
 
 {% block content %}
     {% if tasks %}
-        <script>
-            function submit(a) {
-                document.getElementById(a.id + 'sbm').click()
-            }
-        </script>
         <h1>Задачи, выданные вами</h1>
         <table class="uk-table uk-table-striped">
             <thead>
@@ -46,5 +41,10 @@
             {% endfor %}
             </tbody>
         </table>
+        <script>
+            function submit(a) {
+                document.getElementById(a.id + 'sbm').click()
+            }
+        </script>
     {% endif %}
 {% endblock %}
